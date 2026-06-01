@@ -1,5 +1,5 @@
 import { Navigate, NavLink, Route, Routes } from 'react-router-dom';
-import { BarChart3, Brain, ClipboardList, LayoutDashboard, LogOut, Plus, UserCircle } from 'lucide-react';
+import { BarChart3, Brain, ClipboardList, LayoutDashboard, Plus, UserCircle } from 'lucide-react';
 import { useAuth } from './context/AuthContext';
 import AuthPage from './pages/AuthPage';
 import DashboardPage from './pages/DashboardPage';
@@ -11,7 +11,7 @@ import FocusModePage from './pages/FocusModePage';
 import AnalyticsPage from './pages/AnalyticsPage';
 
 function App() {
-  const { user, loading, logout } = useAuth();
+  const { user, loading } = useAuth();
   const isAdmin = user?.roles.includes('Admin') ?? false;
 
   if (loading) {

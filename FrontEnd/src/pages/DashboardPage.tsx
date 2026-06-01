@@ -1,7 +1,7 @@
 import { type CSSProperties, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { CalendarClock, CheckCircle2, Clock3, Sparkles, Timer, TrendingUp, Users } from 'lucide-react';
-import { ClipboardList, LogOut , Plus} from 'lucide-react';
+import { CalendarClock, CheckCircle2, Clock3, Timer, TrendingUp, Users } from 'lucide-react';
+import { ClipboardList, Plus } from 'lucide-react';
 import { getTaskCounts, getTasks } from '../api/tasks';
 import { getUsers } from '../api/users';
 import { useAuth } from '../context/AuthContext';
