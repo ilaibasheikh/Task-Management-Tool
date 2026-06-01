@@ -5,6 +5,12 @@ export interface UserProfile {
   roles: string[];
 }
 
+export interface UserOption {
+  id: string;
+  fullName: string;
+  email: string;
+}
+
 export interface AuthResponse {
   token: string;
   expiresAt: string;
