@@ -247,12 +247,4 @@ git commit -m "Initialize task management fullstack app"
 
 Use feature branches for new work, pull requests for review, and small commits that group related backend, frontend, and test changes.
 
-## Optional Enhancements
 
-Good next additions:
-
-- SignalR real-time task status updates.
-- CSV export/import for tasks.
-- Admin user-management screen.
-- Refresh tokens.
-- Frontend unit tests with Vitest and React Testing Library.
