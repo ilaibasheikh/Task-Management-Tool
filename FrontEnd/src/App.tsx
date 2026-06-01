@@ -12,6 +12,7 @@ import AnalyticsPage from './pages/AnalyticsPage';
 
 function App() {
   const { user, loading, logout } = useAuth();
+  const isAdmin = user?.roles.includes('Admin') ?? false;
 
   if (loading) {
     return <main className="center-screen">Loading workspace...</main>;
@@ -41,7 +42,7 @@ function App() {
           <Route path="/tasks/new" element={<TaskFormPage />} />
           <Route path="/tasks/:id" element={<TaskDetailPage />} />
           <Route path="/tasks/:id/edit" element={<TaskFormPage />} />
-          <Route path="/focus" element={<FocusModePage />} />
+          <Route path="/focus" element={isAdmin ? <Navigate to="/" replace /> : <FocusModePage />} />
           <Route path="/analytics" element={<AnalyticsPage />} />
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="*" element={<Navigate to="/" replace />} />
@@ -50,10 +51,10 @@ function App() {
 
       <NavLink className="floating-action" to="/tasks/new" aria-label="Quick add task"><Plus size={26} /></NavLink>
 
-      <nav className="bottom-tabs" aria-label="Primary navigation">
+      <nav className={`bottom-tabs ${isAdmin ? 'admin-tabs' : ''}`} aria-label="Primary navigation">
         <NavLink to="/" end><LayoutDashboard size={20} /><span>Home</span></NavLink>
         <NavLink to="/tasks"><ClipboardList size={20} /><span>Tasks</span></NavLink>
-        <NavLink to="/focus"><Brain size={20} /><span>Focus</span></NavLink>
+        {!isAdmin && <NavLink to="/focus"><Brain size={20} /><span>Focus</span></NavLink>}
         <NavLink to="/analytics"><BarChart3 size={20} /><span>Stats</span></NavLink>
         <NavLink to="/profile"><UserCircle size={20} /><span>Profile</span></NavLink>
       </nav>
@@ -62,7 +63,7 @@ function App() {
         <nav aria-label="Desktop navigation">
           <NavLink to="/" end><LayoutDashboard size={20} /><span>Home</span></NavLink>
           <NavLink to="/tasks"><ClipboardList size={20} /><span>Tasks</span></NavLink>
-          <NavLink to="/focus"><Brain size={20} /><span>Focus</span></NavLink>
+          {!isAdmin && <NavLink to="/focus"><Brain size={20} /><span>Focus</span></NavLink>}
           <NavLink to="/analytics"><BarChart3 size={20} /><span>Analytics</span></NavLink>
           <NavLink to="/profile"><UserCircle size={20} /><span>Profile</span></NavLink>
         </nav>

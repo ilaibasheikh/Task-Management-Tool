@@ -1,20 +1,27 @@
 import { type CSSProperties, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { CalendarClock, CheckCircle2, Clock3, Sparkles, Timer, TrendingUp } from 'lucide-react';
+import { CalendarClock, CheckCircle2, Clock3, Sparkles, Timer, TrendingUp, Users } from 'lucide-react';
 import { getTaskCounts, getTasks } from '../api/tasks';
+import { getUsers } from '../api/users';
 import { useAuth } from '../context/AuthContext';
+import type { UserOption } from '../types/auth';
 import type { TaskCounts, TaskItem } from '../types/task';
 import { PriorityBadge, StatusBadge } from '../components/StatusBadge';
 
 export default function DashboardPage() {
   const { user } = useAuth();
+  const isAdmin = user?.roles.includes('Admin') ?? false;
   const [counts, setCounts] = useState<TaskCounts>({ pending: 0, inProgress: 0, completed: 0 });
   const [tasks, setTasks] = useState<TaskItem[]>([]);
+  const [users, setUsers] = useState<UserOption[]>([]);
 
   useEffect(() => {
     getTaskCounts().then(setCounts);
     getTasks({}).then(setTasks);
-  }, []);
+    if (isAdmin) {
+      getUsers().then(setUsers);
+    }
+  }, [isAdmin]);
 
   const total = counts.pending + counts.inProgress + counts.completed;
   const completion = total === 0 ? 0 : Math.round((counts.completed / total) * 100);
@@ -25,6 +32,10 @@ export default function DashboardPage() {
     .sort((a, b) => new Date(a.dueDate ?? '').getTime() - new Date(b.dueDate ?? '').getTime())
     .slice(0, 4);
   const productivityScore = Math.min(100, completion + counts.inProgress * 8 + (counts.completed > 0 ? 10 : 0));
+  const tasksByUser = users.map((item) => ({
+    ...item,
+    taskCount: tasks.filter((task) => task.assignedUserId === item.id).length,
+  }));
 
   return (
     <section className="page home-page">
@@ -92,6 +103,28 @@ export default function DashboardPage() {
           </div>
         </section>
       </div>
+
+      {isAdmin && (
+        <section className="content-card">
+          <div className="section-title">
+            <h2>Users</h2>
+            <Users size={20} />
+          </div>
+          <div className="user-list">
+            {tasksByUser.map((item) => (
+              <article className="user-row" key={item.id}>
+                <span className="avatar small-avatar">{item.fullName.charAt(0).toUpperCase()}</span>
+                <div>
+                  <strong>{item.fullName}</strong>
+                  <small>{item.email}</small>
+                </div>
+                <span>{item.taskCount} tasks</span>
+              </article>
+            ))}
+            {users.length === 0 && <p className="empty-state">No users are available yet.</p>}
+          </div>
+        </section>
+      )}
     </section>
   );
 }

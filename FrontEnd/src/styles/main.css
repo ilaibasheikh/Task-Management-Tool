@@ -487,6 +487,12 @@ textarea {
 .metric strong {
   font-size: 2.35rem;
   letter-spacing: 0;
+  overflow-wrap: anywhere;
+}
+
+.metric small {
+  color: #64748b;
+  font-weight: 800;
 }
 
 .completed-card {
@@ -996,6 +1002,62 @@ textarea {
   line-height: 1.65;
 }
 
+.admin-analytics-grid {
+  display: grid;
+  grid-template-columns: minmax(260px, 0.36fr) minmax(0, 1fr);
+  gap: 18px;
+  align-items: stretch;
+}
+
+.admin-analytics-grid .metric strong {
+  font-size: 1.55rem;
+  line-height: 1.15;
+}
+
+.user-list,
+.user-stats-list {
+  display: grid;
+  gap: 12px;
+}
+
+.user-row,
+.user-stat-row {
+  display: grid;
+  align-items: center;
+  gap: 12px;
+  padding: 13px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+}
+
+.user-row {
+  grid-template-columns: auto minmax(0, 1fr) auto;
+}
+
+.user-stat-row {
+  grid-template-columns: minmax(0, 1fr) repeat(3, auto);
+}
+
+.user-row strong,
+.user-stat-row strong {
+  display: block;
+  overflow-wrap: anywhere;
+}
+
+.user-row small,
+.user-stat-row small {
+  color: #64748b;
+}
+
+.user-row > span:last-child,
+.user-stat-row > span {
+  color: #1d4ed8;
+  font-size: 0.82rem;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
 .profile-hero {
   display: grid;
   grid-template-columns: auto minmax(0, 1fr) auto;
@@ -1015,6 +1077,13 @@ textarea {
   font-size: 1.35rem;
   font-weight: 950;
   box-shadow: 0 18px 38px rgba(59, 130, 246, 0.28);
+}
+
+.small-avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 15px;
+  font-size: 0.95rem;
 }
 
 .profile-grid {
@@ -1132,6 +1201,10 @@ textarea {
   background: rgba(59, 130, 246, 0.38);
 }
 
+.bottom-tabs.admin-tabs {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
 @media (max-width: 1080px) {
   .metric-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1140,6 +1213,7 @@ textarea {
   .dashboard-grid,
   .profile-grid,
   .insight-grid,
+  .admin-analytics-grid,
   .focus-page {
     grid-template-columns: 1fr;
   }
@@ -1213,7 +1287,9 @@ textarea {
 
   .metric-grid,
   .badge-grid,
-  .activity-card li {
+  .activity-card li,
+  .user-row,
+  .user-stat-row {
     grid-template-columns: 1fr;
   }
 
