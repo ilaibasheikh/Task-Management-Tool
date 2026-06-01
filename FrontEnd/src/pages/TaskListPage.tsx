@@ -54,8 +54,8 @@ export default function TaskListPage() {
     <section className="page tasks-page">
       <header className="page-header">
         <div>
-          <span className="eyebrow">Task management</span>
-          <h1>Organize the work by energy and urgency.</h1>
+          <span className="eyebrow">TaskFlow</span>
+          <h1>Organize the work by priority.</h1>
           <p>Drag cards across columns, filter quickly, and keep progress visible.</p>
         </div>
         <Link className="primary-link" to="/tasks/new"><Plus size={18} /> New Task</Link>

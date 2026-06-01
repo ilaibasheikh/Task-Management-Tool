@@ -90,21 +90,24 @@ export default function AnalyticsPage() {
           </section>
         </div>
       )}
-
-      <section className="content-card">
-        <div className="section-title">
-          <h2>Weekly productivity</h2>
-          <LineChart size={20} />
-        </div>
-        <div className="bar-chart">
-          {weeklyBars.map((bar) => (
-            <div className="bar-item" key={bar.day}>
-              <span style={{ height: `${bar.value}%` }} />
-              <small>{bar.day}</small>
-            </div>
-          ))}
-        </div>
-      </section>
+      {!isAdmin && (
+        <>
+       
+        <section className="content-card">
+          <div className="section-title">
+            <h2>Weekly productivity</h2>
+            <LineChart size={20} />
+          </div>
+          <div className="bar-chart">
+            {weeklyBars.map((bar) => (
+              <div className="bar-item" key={bar.day}>
+                <span style={{ height: `${bar.value}%` }} />
+                <small>{bar.day}</small>
+              </div>
+            ))}
+          </div>
+        </section>
+      
 
       <div className="insight-grid">
         <article className="content-card insight-card">
@@ -116,6 +119,8 @@ export default function AnalyticsPage() {
           <p>{tasks.filter((task) => task.dueDate && task.status !== 2).length} active tasks have due dates. Keep the top three visible today.</p>
         </article>
       </div>
+       </>
+      )}
     </section>
   );
 }

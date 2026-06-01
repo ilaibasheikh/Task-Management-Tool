@@ -10,19 +10,21 @@ export default function ProfilePage() {
     .slice(0, 2)
     .toUpperCase();
 
+    const isAdmin = user?.roles.includes('Admin') ?? false;
+
   return (
     <section className="page profile-page">
       <header className="profile-hero glass-panel">
         <div className="avatar">{initials}</div>
         <div>
-          <span className="eyebrow">Profile and achievements</span>
+          <span className="eyebrow">Profile</span>
           <h1>{user?.fullName}</h1>
           <p>{user?.email}</p>
         </div>
         <button className="icon-text-button" onClick={logout}><LogOut size={18} /> Logout</button>
       </header>
-
-      <div className="profile-grid">
+  {!isAdmin && (
+    <div className="profile-grid">
         <section className="content-card level-card">
           <Crown size={24} />
           <span>Productivity level</span>
@@ -55,6 +57,8 @@ export default function ProfilePage() {
           </ol>
         </section>
       </div>
+    )}
+      
     </section>
   );
 }

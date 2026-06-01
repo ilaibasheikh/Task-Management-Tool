@@ -216,7 +216,7 @@ textarea {
 
 .app-shell {
   min-height: 100vh;
-  padding: 92px 28px 104px 112px;
+  padding: 22px 28px 104px 112px;
 }
 
 .top-bar {
@@ -242,17 +242,26 @@ textarea {
   display: flex;
   align-items: center;
   gap: 12px;
+  
 }
 
 .brand-mark {
-  display: grid;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 42px;
   height: 42px;
-  place-items: center;
   color: #ffffff;
   background: linear-gradient(135deg, #0f172a, #3b82f6);
   border-radius: 16px;
   box-shadow: 0 12px 28px rgba(59, 130, 246, 0.26);
+    
+}
+
+.brand-mark svg {
+  display: block;
+  transform: translate(5px, 5px);
+   
 }
 
 .brand strong,
@@ -404,10 +413,11 @@ textarea {
 
 .progress-ring {
   position: relative;
-  display: grid;
   width: 190px;
   height: 190px;
-  place-items: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   color: #0f172a;
 }
 
@@ -430,24 +440,35 @@ textarea {
 }
 
 .ring-value {
-  stroke: url("#progressGradient");
   stroke: #10b981;
   stroke-linecap: round;
   stroke-dasharray: var(--progress) 100;
   transition: stroke-dasharray 420ms ease;
 }
 
-.progress-ring strong {
+.progress-text {
+  position: relative;
   z-index: 1;
-  font-size: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  text-align: center;
 }
 
-.progress-ring span {
-  z-index: 1;
-  margin-top: 54px;
+.progress-text strong {
+  font-size: 2.5rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.progress-text span {
   color: #64748b;
   font-size: 0.82rem;
-  font-weight: 800;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
 }
 
 .metric-grid {
@@ -1240,7 +1261,7 @@ textarea {
   }
 
   .app-shell {
-    padding: 92px 14px 112px;
+     padding: 22px 28px 104px 112px;
   }
 
   .desktop-rail {

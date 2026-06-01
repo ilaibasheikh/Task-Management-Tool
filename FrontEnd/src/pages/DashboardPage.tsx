@@ -1,6 +1,7 @@
 import { type CSSProperties, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { CalendarClock, CheckCircle2, Clock3, Sparkles, Timer, TrendingUp, Users } from 'lucide-react';
+import { ClipboardList, LogOut , Plus} from 'lucide-react';
 import { getTaskCounts, getTasks } from '../api/tasks';
 import { getUsers } from '../api/users';
 import { useAuth } from '../context/AuthContext';
@@ -40,20 +41,32 @@ export default function DashboardPage() {
   return (
     <section className="page home-page">
       <header className="hero-panel glass-panel">
+
         <div>
-          <span className="eyebrow">Today feels doable</span>
+          <div className="brand ">
+           <span className="brand-mark">
+  <ClipboardList size={29} />
+</span>
+            <span className="eyebrow">TaskFlow</span>
+
+          </div>
+
+
           <h1>Good to see you, {user?.fullName?.split(' ')[0] ?? 'there'}.</h1>
           <p>Your workspace is tuned for steady progress, clear priorities, and one focused next step.</p>
-          <Link className="primary-link soft-glow" to="/tasks/new"><Sparkles size={18} /> Quick add task</Link>
+          <Link className="primary-link soft-glow" to="/tasks/new"><Plus size={20} />Quick add task</Link>
         </div>
         <div className="progress-ring" style={{ '--progress': completion } as CSSProperties}>
-          <svg viewBox="0 0 120 120" aria-label={`${completion}% complete`}>
-            <circle className="ring-track" cx="60" cy="60" r="50" />
-            <circle className="ring-value" cx="60" cy="60" r="50" pathLength="100" />
-          </svg>
-          <strong>{completion}%</strong>
-          <span>daily progress</span>
-        </div>
+  <svg viewBox="0 0 120 120" aria-label={`${completion}% complete`}>
+    <circle className="ring-track" cx="60" cy="60" r="50" />
+    <circle className="ring-value" cx="60" cy="60" r="50" pathLength="100" />
+  </svg>
+
+  <div className="progress-text">
+    <strong>{completion}%</strong>
+    <span>Daily Progress</span>
+  </div>
+</div>
       </header>
 
       <div className="metric-grid">

@@ -24,16 +24,7 @@ function App() {
 
   return (
     <div className="app-shell">
-      <header className="top-bar">
-        <div className="brand ">
-          <span className="brand-mark"><ClipboardList size={29} /></span>
-          <div>
-            <strong>TaskFlow</strong>
-            <span>Plan with calm momentum</span>
-          </div>
-        </div>
-        <button className="icon-text-button" onClick={logout}><LogOut size={18} /> Logout</button>
-      </header>
+     
 
       <main className="main-panel">
         <Routes>
