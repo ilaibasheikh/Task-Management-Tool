@@ -27,7 +27,7 @@ export default function TaskFormPage() {
 
   useEffect(() => {
     if (!id) {
-      setTask(emptyTask);
+      queueMicrotask(() => setTask(emptyTask));
       return;
     }
 

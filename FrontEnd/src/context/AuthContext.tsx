@@ -14,11 +14,10 @@ const AuthContext = createContext<AuthContextValue | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<UserProfile | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(() => Boolean(localStorage.getItem('task-tool-token')));
 
   useEffect(() => {
     if (!localStorage.getItem('task-tool-token')) {
-      setLoading(false);
       return;
     }
 
